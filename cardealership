@@ -1,0 +1,249 @@
+Current Mongosh Log ID: 643110a42700b3a56b8f7fa8
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+Using MongoDB:          6.0.5
+Using Mongosh:          1.8.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+CREATION
+
+test> use nosql
+switched to db nosql
+nosql> db.createCollection("customer")
+{ ok: 1 }
+nosql> db.customer.insertMany([{
+... Name:"abi",
+... id:"123",
+... mem_type:"gold"},
+... {
+... Name:"ragavi",
+... id:"456",
+... mem_type:"silver"},
+... {
+... Name:"ravi",
+... id:"789",
+... mem_type:"platinum"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6431154c37cc30649aab7f17"),
+    '1': ObjectId("6431154c37cc30649aab7f18"),
+    '2': ObjectId("6431154c37cc30649aab7f19")
+  }
+}
+nosql> db.createCollection("car")
+
+nosql> db.car.insertMany([{
+... Brand :"bmw",
+... car_id :"b1",
+... cust_id:"456",
+... model:"m5",
+... engine:"4395cc",
+... year:"2015",
+... make:"sm"},
+... {Brand:"audi",
+... car_id:"a3",
+... cust_id:"123",
+... model:"a8",
+... engine:"2988cc",
+... year:"2008",
+... make:"hss"},
+... {
+... Brand:"benz",
+... car_id:"be9",
+... cust_id:"789",
+... model:"s_class",
+... engine:"3500cc",
+... year:"2022",
+... make:"75ss"},
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64311aa337cc30649aab7f1a"),
+    '1': ObjectId("64311aa337cc30649aab7f1b"),
+    '2': ObjectId("64311aa337cc30649aab7f1c")
+  }
+}
+nosql> db.createCollection("staff")
+{ ok: 1 }
+nosql> db.staff.insertMany([{name:"anu",
+... id :"st1",
+... cust_id:"789",
+... position:"manager",
+... salary:"24000"},
+... {
+... name:"boopathy",
+... id :"st2",
+... cust_id:"456",
+... position:"supervisor",
+... salary:"30000"}
+... ,
+... {
+... name:"sathya",
+... id :"st3",
+... cust_id:"123",
+... position:"dealer",
+... salary:"15000"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64311da937cc30649aab7f1d"),
+    '1': ObjectId("64311da937cc30649aab7f1e"),
+    '2': ObjectId("64311da937cc30649aab7f1f")
+  }
+}
+
+READ
+
+nosql> db.customer.find()
+[
+  {
+    _id: ObjectId("6431154c37cc30649aab7f17"),
+    Name: 'abi',
+    id: '123',
+    mem_type: 'gold'
+  },
+  {
+    _id: ObjectId("6431154c37cc30649aab7f18"),
+    Name: 'ragavi',
+    id: '456',
+    mem_type: 'silver'
+  },
+  {
+    _id: ObjectId("6431154c37cc30649aab7f19"),
+    Name: 'ravi',
+    id: '789',
+    mem_type: 'platinum'
+  }
+]
+nosql> db.car.find()
+[
+  {
+    _id: ObjectId("64311aa337cc30649aab7f1a"),
+    Brand: 'bmw',
+    car_id: 'b1',
+    cust_id: '456',
+    model: 'm5',
+    engine: '4395cc',
+    year: '2015',
+    make: 'sm'
+  },
+  {
+    _id: ObjectId("64311aa337cc30649aab7f1b"),
+    Brand: 'audi',
+    car_id: 'a3',
+    cust_id: '123',
+    model: 'a8',
+    engine: '2988cc',
+    year: '2008',
+    make: 'hss'
+  },
+  {
+    _id: ObjectId("64311aa337cc30649aab7f1c"),
+    Brand: 'benz',
+    car_id: 'be9',
+    cust_id: '789',
+    model: 's_class',
+    engine: '3500cc',
+    year: '2022',
+    make: '75ss'
+  }
+]
+nosql> db.staff.find()
+[
+  {
+    _id: ObjectId("64311da937cc30649aab7f1d"),
+    name: 'anu',
+    id: 'st1',
+    cust_id: '789',
+    position: 'manager',
+    salary: '24000'
+  },
+  {
+    _id: ObjectId("64311da937cc30649aab7f1e"),
+    name: 'boopathy',
+    id: 'st2',
+    cust_id: '456',
+    position: 'supervisor',
+    salary: '30000'
+  },
+  {
+    _id: ObjectId("64311da937cc30649aab7f1f"),
+    name: 'sathya',
+    id: 'st3',
+    cust_id: '123',
+    position: 'dealer',
+    salary: '15000'
+  }
+]
+
+UPDATION
+
+nosql> db.staff.update({
+... "cust_id":"456"},
+... {
+... $set:
+... {"cust_id":"546"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+nosql> db.staff.find()
+[
+  {
+    _id: ObjectId("64311da937cc30649aab7f1d"),
+    name: 'anu',
+    id: 'st1',
+    cust_id: '789',
+    position: 'manager',
+    salary: '24000'
+  },
+  {
+    _id: ObjectId("64311da937cc30649aab7f1e"),
+    name: 'boopathy',
+    id: 'st2',
+    cust_id: '546',
+    position: 'supervisor',
+    salary: '30000'
+  },
+  {
+    _id: ObjectId("64311da937cc30649aab7f1f"),
+    name: 'sathya',
+    id: 'st3',
+    cust_id: '123',
+    position: 'dealer',
+    salary: '15000'
+  }
+]
+
+DELETION
+
+db.car.deleteOne({"year":"2008"})
+{ acknowledged: true, deletedCount: 1 }
+nosql> db.car.find()
+[
+  {
+    _id: ObjectId("64311aa337cc30649aab7f1a"),
+    Brand: 'bmw',
+    car_id: 'b1',
+    cust_id: '456',
+    model: 'm5',
+    engine: '4395cc',
+    year: '2015',
+    make: 'sm'
+  },
+  {
+    _id: ObjectId("64311aa337cc30649aab7f1c"),
+    Brand: 'benz',
+    car_id: 'be9',
+    cust_id: '789',
+    model: 's_class',
+    engine: '3500cc',
+    year: '2022',
+    make: '75ss'
+  }
+]
